@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightGearShopApp.Data
+namespace FightGearShopApp.Infrastucture.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
