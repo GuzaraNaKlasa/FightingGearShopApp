@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FightGearShopApp.Infrastucture.Data.Domain
 {
-    internal class Brand
+    public class Brand
     {
         public int Id { get; set; }
         [Required]

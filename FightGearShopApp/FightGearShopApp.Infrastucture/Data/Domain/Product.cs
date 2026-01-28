@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FightGearShopApp.Infrastucture.Data.Domain
 {
-    internal class Product
+    public class Product
     {
         public int Id { get; set; }
         [Required]

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using FightGearShopApp.Infrastucture.Data.Domain;
+
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FightGearShopApp.Infrastucture.Data
@@ -9,5 +11,9 @@ namespace FightGearShopApp.Infrastucture.Data
             : base(options)
         {
         }
+        public  DbSet<Brand> Brands { get; set; }
+        public  DbSet<Category> Categories { get; set; }
+        public  DbSet<Order> Orders { get; set; }
+        public  DbSet<Product> Products { get; set; }
     }
 }

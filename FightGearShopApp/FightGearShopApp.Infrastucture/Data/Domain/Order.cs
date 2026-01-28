@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace FightGearShopApp.Infrastucture.Data.Domain
 {
-    internal class Order
+    public class Order
     {
         public int Id { get; set; }
 
