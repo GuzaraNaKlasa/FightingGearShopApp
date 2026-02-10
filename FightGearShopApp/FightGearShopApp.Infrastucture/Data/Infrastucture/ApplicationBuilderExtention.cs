@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FightGearShopApp.Infrastucture.Data.Domain;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +22,7 @@ namespace FightGearShopApp.Infrastucture.Data.Infrastucture
             var services = serviceScope.ServiceProvider;
 
             await RoleSeeder(services);
-            //  await SeedAdministrator(services);
+            await SeedAdministrator(services);
 
             return app;
         }
@@ -42,6 +44,30 @@ namespace FightGearShopApp.Infrastucture.Data.Infrastucture
                     roleResult = await roleManager.CreateAsync(new IdentityRole(role));
                 }
             }
+        }
+
+        private static async Task SeedAdministrator(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            if (await userManager.FindByNameAsync("admin") == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "admin";
+                user.LastName = "admin";
+                user.UserName = "admin";
+                user.Email = "admin@admin.com";
+                user.Address = "admin address";
+                user.PhoneNumber = "088888888";
+
+                var result = await userManager.CreateAsync(user, "Admin123456");
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Administrator").Wait();
+                }
+            }
+
         }
     }
 

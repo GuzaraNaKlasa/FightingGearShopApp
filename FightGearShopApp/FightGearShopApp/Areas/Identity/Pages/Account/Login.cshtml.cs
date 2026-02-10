@@ -49,10 +49,7 @@ namespace FightGearShopApp.Areas.Identity.Pages.Account
           
             public string UserName { get; set; }
 
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
+          
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -86,7 +83,7 @@ namespace FightGearShopApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password,true, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password,true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     

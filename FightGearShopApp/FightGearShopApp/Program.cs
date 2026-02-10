@@ -1,5 +1,6 @@
 using FightGearShopApp.Infrastucture.Data;
 using FightGearShopApp.Infrastucture.Data.Domain;
+using FightGearShopApp.Infrastucture.Data.Infrastucture;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +28,13 @@ namespace FightGearShopApp
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
+            app.PrepareDatabase();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
