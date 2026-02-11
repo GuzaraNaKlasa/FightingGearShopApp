@@ -24,6 +24,12 @@ namespace FightGearShopApp.Infrastucture.Data.Infrastucture
             await RoleSeeder(services);
             await SeedAdministrator(services);
 
+            var dataCategory = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedCategories(dataCategory);
+
+            var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedBrands(dataBrand);
+
             return app;
         }
 
@@ -68,6 +74,45 @@ namespace FightGearShopApp.Infrastucture.Data.Infrastucture
                 }
             }
 
+        }
+
+        private static void SeedCategories(ApplicationDbContext dataCategory)
+        {
+            if (dataCategory.Categories.Any())
+            {
+                return;
+            }
+            dataCategory.Categories.AddRange(new[]
+            {
+            new Category {CategoryName="Boxing Gloves"},
+            new Category {CategoryName="Shin Pads"},
+            new Category {CategoryName="Boxing warps"},
+            new Category {CategoryName="mouth guard"},
+            new Category {CategoryName="Boxing headgear"},
+            new Category {CategoryName="Boxing Shoes"},
+            new Category {CategoryName="Boxing Shirts"},
+            new Category {CategoryName="Boxing Shorts"},
+            });
+            dataCategory.SaveChanges();
+        }
+
+        private static void SeedBrands(ApplicationDbContext dataBrand)
+        {
+            if (dataBrand.Brands.Any())
+            {
+                return;
+            }
+            dataBrand.Brands.AddRange(new[]
+            {
+            new Brand {BrandName="Venum"},
+            new Brand {BrandName="Leone"},
+            new Brand {BrandName="8wepon"},
+            new Brand {BrandName="Twins"},
+            new Brand {BrandName="Yokkao"},
+            new Brand {BrandName="Fairtex"},
+
+            });
+            dataBrand.SaveChanges();
         }
     }
 
