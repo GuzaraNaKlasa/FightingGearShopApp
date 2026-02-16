@@ -41,27 +41,66 @@ namespace FightGearShopApp.Core.Services
 
         public Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _context.Products.Find(productId);
+
         }
 
         public List<Product> GetProducts()
         {
-            throw new NotImplementedException();
+            List<Product> products = _context.Products.ToList();
+            return products;
         }
 
         public List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName)
         {
-            throw new NotImplementedException();
+          List <Product> products = _context.Products.ToList();
+
+            if (!string.IsNullOrEmpty(searchStringCategoryName)
+                && !string.IsNullOrEmpty(searchStringBrandName))
+            {
+                products =products.Where(x => x.Category.CategoryName.ToLower()
+                .Contains (searchStringBrandName.ToLower())).ToList();
+
+            }
+            return products;
+
         }
 
-        public bool RemoveById(int delproductId)
+        public bool RemoveById(int productId)
         {
-            throw new NotImplementedException();
+            var product=GetProductById(productId);
+            if (product == default(Product))
+            {
+                return false;
+            }
+            _context.Remove(product);
+            return _context.SaveChanges() !=0;
         }
+        
 
-        public bool Update(int productId, string name, int brandId, int categoryId, string picture, int quanity, decimal price, decimal discount)
+        public bool Update(int productId, string name, int brandId, int categoryId, string picture, int quanity,
+            decimal price, decimal discount)
         {
-            throw new NotImplementedException();
+            var product =GetProductById(productId);
+            if (product ==default(Product))
+            {
+                return false;
+            }
+            product.ProductName=name;
+
+            // product.BrandId=brandId;
+            // product.CategoryId=categoryId;
+
+            product.Brand = _context.Brands.Find(brandId);
+            product.Category=_context.Categories.Find(categoryId);
+
+            product.Picture=picture;
+            product.Quanity=quanity;
+            product.Price=price;
+            product.Discount=discount;
+            _context.Update(product);
+            return _context.SaveChanges() !=0;
+
         }
     }
 }
