@@ -30,8 +30,8 @@ namespace FightGearShopApp.Models.Product
         public string Picture { get; set; } = null!;
 
         [Range(0, 5000)]
-        [Display(Name = "Quanity")]
-        public int Quanity { get; set; }
+        [Display(Name = "Quantity")]
+        public int Quantity { get; set; }
 
         [Display(Name = "Price")]
         public decimal Price { get; set; }

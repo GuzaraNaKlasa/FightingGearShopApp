@@ -1,11 +1,11 @@
 ﻿using FightGearShopApp.Core.Contracts;
 using FightGearShopApp.Models.Brand;
 using FightGearShopApp.Models.Category;
-
+using FightGearShopApp.Models.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FightGearShopApp.Models.Product
+namespace FightGearShopApp.Controllers
 {
     public class ProductController : Controller
     {
@@ -15,9 +15,9 @@ namespace FightGearShopApp.Models.Product
 
         public ProductController(IProductService productService, ICategoryService categoryService, IBrandService brandService)
         {
-            this._productService = productService;
-            this._categoryService = categoryService;
-            this._brandService = brandService;
+            _productService = productService;
+            _categoryService = categoryService;
+            _brandService = brandService;
         }
 
 
@@ -37,7 +37,7 @@ namespace FightGearShopApp.Models.Product
         public ActionResult Create()
         {
             var product = new ProductCreateVM();
-            product.Brands= _brandService.GetBrands()
+            product.Brands = _brandService.GetBrands()
                 .Select(x => new BrandPairVM()
                 {
                     Id = x.Id,
@@ -56,20 +56,20 @@ namespace FightGearShopApp.Models.Product
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] ProductCreateVM product )
+        public ActionResult Create([FromForm] ProductCreateVM product)
         {
             if (ModelState.IsValid)
             {
                 var createId = _productService.Create(product.ProductName, product.BrandId,
-                    product.CategoryId, product.Picture, product.Quanity, product.Price, product.Discount);
+                    product.CategoryId, product.Picture, product.Quantity, product.Price, product.Discount);
                 if (createId)
                 {
                     return RedirectToAction(nameof(Index));
                 }
             }
-       
-                return View();
-            
+
+            return View();
+
         }
 
         // GET: ProductController/Edit/5
