@@ -39,7 +39,7 @@ namespace FightGearShopApp.Controllers
                  Discount = product.Discount
              }).ToList();
 
-            return View();
+            return View(products);
         }
 
         // GET: ProductController/Details/5
