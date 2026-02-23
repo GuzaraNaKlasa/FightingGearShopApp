@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FightGearShopApp.Infrastucture.Migrations
 {
     /// <inheritdoc />
-    public partial class hhh : Migration
+    public partial class asdd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -195,7 +195,7 @@ namespace FightGearShopApp.Infrastucture.Migrations
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quanity = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

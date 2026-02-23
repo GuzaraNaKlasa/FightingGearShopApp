@@ -28,7 +28,7 @@ namespace FightGearShopApp.Infrastucture.Data.Domain
         public string Picture { get; set; } = null!;
 
         [Range(0, 5000)]
-        public int Quanity { get; set; }
+        public int Quantity { get; set; }
         public Decimal Price { get; set; }
         public Decimal Discount { get; set; }
 

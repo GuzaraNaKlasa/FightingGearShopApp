@@ -14,7 +14,7 @@ namespace FightGearShopApp.Models.Product
         public int BrandId { get; set; }
         [Display(Name = "Brand")]
 
-        public string BrandtName { get; set; }
+        public string BrandName { get; set; }
 
         public int CategoryId { get; set; }
         [Display(Name = "Category Name")]
