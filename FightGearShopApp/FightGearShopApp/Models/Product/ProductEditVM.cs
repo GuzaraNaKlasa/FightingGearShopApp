@@ -2,9 +2,11 @@
 using FightGearShopApp.Models.Brand;
 using FightGearShopApp.Models.Category;
 
+using Microsoft.AspNetCore.Http.HttpResults;
+
 using System.ComponentModel.DataAnnotations;
 
-namespace FightGearShopApp.Views.Product
+namespace FightGearShopApp.Models.Product
 {
     public class ProductEditVM
     {
@@ -23,7 +25,7 @@ namespace FightGearShopApp.Views.Product
             = new List<BrandPairVM>();
 
         [Display(Name = "Category")]
-        public int Categoryid { get; set; }
+        public int CategoryId { get; set; }
         public virtual List<CategoryPairVM> Categories { get; set; }
             = new List<CategoryPairVM>();
 
@@ -40,6 +42,8 @@ namespace FightGearShopApp.Views.Product
         [Display(Name = "Discount")]
         public decimal Discount { get; set; }
     }
+ 
+    
 
-  
+
 }

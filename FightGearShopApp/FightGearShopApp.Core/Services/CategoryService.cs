@@ -26,7 +26,7 @@ namespace FightGearShopApp.Core.Services
             return _context.Categories.Find(categoryId);
         }
 
-        public List<Category> Getcategories()
+        public List<Category> GetCategories()
         {
           List<Category> categories = _context.Categories.ToList();
             return categories;

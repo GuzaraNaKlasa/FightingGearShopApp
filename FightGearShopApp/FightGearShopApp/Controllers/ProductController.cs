@@ -1,4 +1,6 @@
 ﻿using FightGearShopApp.Core.Contracts;
+using FightGearShopApp.Core.Services;
+using FightGearShopApp.Infrastucture.Data.Domain;
 using FightGearShopApp.Models.Brand;
 using FightGearShopApp.Models.Category;
 using FightGearShopApp.Models.Product;
@@ -45,7 +47,24 @@ namespace FightGearShopApp.Controllers
         // GET: ProductController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Product item = _productService.GetProductById(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            ProductEditVM product = new ProductEditVM()
+            {
+                Id = item.Id,
+                ProductName = item.ProductName,
+                BrandId = item.BrandId,
+                CategoryId = item.CategoryId,
+                Picture = item.Picture,
+                Quantity = item.Quantity,
+                Price = item.Price,
+                Discount = item.Discount
+            };
+            return View(product);
         }
 
         // GET: ProductController/Create
@@ -59,7 +78,7 @@ namespace FightGearShopApp.Controllers
                     Name = x.BrandName
                 }).ToList();
 
-            product.Categories = _categoryService.Getcategories()
+            product.Categories = _categoryService.GetCategories()
                .Select(x => new CategoryPairVM()
                {
                    Id = x.Id,
@@ -88,23 +107,63 @@ namespace FightGearShopApp.Controllers
         }
 
         // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit (int id)
         {
-            return View();
+            Product product = _productService.GetProductById(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            ProductEditVM updateProduct = new ProductEditVM()
+            {
+                Id = product.Id,
+                 ProductName = product.ProductName,
+                 BrandId = product.BrandId,
+                 CategoryId = product.CategoryId,
+                 Picture = product.Picture,
+                 Quantity = product.Quantity,
+                 Price = product.Price,
+                 Discount = product.Discount
+            };
+            updateProduct.Brands= _brandService.GetBrands()
+                .Select(b => new BrandPairVM()
+                {
+                    Id =b.Id,
+                    Name=b.BrandName
+                })
+                .ToList();
+
+            updateProduct.Categories = _categoryService.GetCategories()
+              .Select(c => new CategoryPairVM()
+              {
+                  Id = c.Id,
+                  Name = c.CategoryName
+              })
+              .ToList();
+            return View(updateProduct);
         }
+
 
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ProductEditVM product)
         {
-            try
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                if (ModelState.IsValid)
+                {
+                    var updated = _productService.Update
+                   (id, product.ProductName, product.BrandId, product.CategoryId,
+                   product.Picture, product.Quantity, product.Price,
+                   product.Discount);
+                    if (updated)
+                    {
+                        return this.RedirectToAction("Index");
+                    }
+                }
+
+                return View(product);
             }
         }
 
