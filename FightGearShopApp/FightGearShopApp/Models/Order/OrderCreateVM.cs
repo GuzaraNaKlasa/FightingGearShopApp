@@ -10,7 +10,7 @@ namespace FightGearShopApp.Models.Order
 
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public int QuanitityInStock { get; set; }
+        public int QuantityInStock { get; set; }
         public string? Picture { get; set; }
 
         [Range(1, 100)]
