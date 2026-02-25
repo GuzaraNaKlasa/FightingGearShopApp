@@ -4,11 +4,14 @@ using FightGearShopApp.Infrastucture.Data.Domain;
 using FightGearShopApp.Models.Brand;
 using FightGearShopApp.Models.Category;
 using FightGearShopApp.Models.Product;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FightGearShopApp.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -24,6 +27,7 @@ namespace FightGearShopApp.Controllers
 
 
         // GET: ProductController
+        [AllowAnonymous]
         public ActionResult Index(string searchStringCategoryName, string searchStringBrandName)
         {
             List<ProductIndexVM> products = _productService.GetProducts(searchStringCategoryName,
@@ -45,6 +49,7 @@ namespace FightGearShopApp.Controllers
         }
 
         // GET: ProductController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             Product item = _productService.GetProductById(id);
@@ -53,7 +58,7 @@ namespace FightGearShopApp.Controllers
             {
                 return NotFound();
             }
-            ProductEditVM product = new ProductEditVM()
+            ProductDetailsVM product = new ProductDetailsVM()
             {
                 Id = item.Id,
                 ProductName = item.ProductName,
@@ -170,7 +175,25 @@ namespace FightGearShopApp.Controllers
         // GET: ProductController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+
+            Product item = _productService.GetProductById(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            ProductDeleteVM product = new ProductDeleteVM()
+            {
+                Id = item.Id,
+                ProductName = item.ProductName,
+                BrandId = item.BrandId,
+                CategoryId = item.CategoryId,
+                Picture = item.Picture,
+                Quantity = item.Quantity,
+                Price = item.Price,
+                Discount = item.Discount
+            };
+            return View(product);
         }
 
         // POST: ProductController/Delete/5
@@ -178,14 +201,25 @@ namespace FightGearShopApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
+            var deleted = _productService.RemoveById(id);
+
+            if (deleted)
             {
-                return RedirectToAction(nameof(Index));
+                return this.RedirectToAction("Success");
             }
-            catch
+
+            else
             {
                 return View();
             }
+        
+    
+        }
+
+        public IActionResult Success()
+        {
+            return View();
         }
     }
+
 }
