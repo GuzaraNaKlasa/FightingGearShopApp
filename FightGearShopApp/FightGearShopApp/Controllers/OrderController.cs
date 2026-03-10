@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Identity.Client;
 
+using System.Globalization;
 using System.Security.Claims;
 
 namespace FightGearShopApp.Controllers
@@ -21,11 +22,7 @@ namespace FightGearShopApp.Controllers
         {
             _productService = _productService;
                 _orderService= orderService;
-        }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        }      
 
         // GET: OrderController/Create
         public ActionResult Create(int id)
@@ -69,10 +66,60 @@ namespace FightGearShopApp.Controllers
             ///Successfull Order
             return this.RedirectToAction("Index","Product");
         }
+
+        /// Get:OrderController/Action Denied
         public ActionResult Denied () 
         {
             return View();
         }
 
+        // GET: OrderController
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Index()
+        {
+            List<OrderIndexVM> orders = _orderService.GetOrders()
+                .Select(x=> new OrderIndexVM
+                { 
+                    Id = x.Id,
+                    OrderDate=x.OrderDate.ToString("dd-MMM-yyyy hh:mm",CultureInfo.InvariantCulture),
+                    UserId=x.UserId,
+                    User=x.User.UserName,
+                    ProductId=x.ProductId,
+                    Product=x.Product.ProductName,
+                    Picture=x.Product.Picture,
+                    Qauntity=x.Quanity,
+                    Price=x.Price,
+                    Discount=x.Discount,
+                    TotalPrice=x.TotalPrice,
+
+
+                }).ToList();
+            return View(orders);
+        }
+
+        public ActionResult MyOrders()
+        {
+            string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            List<OrderIndexVM> orders = _orderService.GetOrdersByUser(currentUserId)
+                .Select(x => new OrderIndexVM
+                {
+                    Id = x.Id,
+                    OrderDate = x.OrderDate.ToString("dd-MMM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                    UserId = x.UserId,
+                    User = x.User.UserName,
+                    ProductId = x.ProductId,
+                    Product = x.Product.ProductName,
+                    Picture = x.Product.Picture,
+                    Qauntity = x.Quanity,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    TotalPrice = x.TotalPrice,
+
+
+                }).ToList();
+
+            return View(orders);
+        }
     }
 }
