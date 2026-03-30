@@ -1,62 +1,62 @@
 ﻿@model FightGearShopApp.Models.Product.ProductDetailsVM
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли";
 }
-<h1>Details</h1>
-<div>
-    <h4>ProductDetailsVM</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BrandName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BrandName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Html.DisplayFor(model => model.Picture)" alt="Image"
-                 width="100" />
-        
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-    </dl>
+
+<div class="container py-5">
+
+    <div class="card product-card p-4">
+        <div class="row g-4">
+
+            <!-- IMAGE -->
+            <div class="col-md-5 text-center">
+                <img src="@Model.Picture" class="img-fluid product-img" alt="Product Image">
+            </div>
+
+            <!-- INFO -->
+            <div class="col-md-7">
+                <h2 class="mb-3 text-primary">@Model.ProductName</h2>
+
+                <p class="text-dark mb-1">Марка: <strong>@Model.BrandName</strong></p>
+                <p class="text-dark mb-1">Категория: <strong>@Model.CategoryName</strong></p>
+
+                <hr />
+
+                <h3 class="price mb-3">@Model.Price лв.</h3>
+
+                @if (Model.Discount > 0)
+                {
+                    <p class="text-success">Отстъпка: @Model.Discount %</p>
+                }
+
+                <p>
+                    Наличност:
+                    <strong>@(Model.Quantity > 0 ? "В наличност" : "Изчерпан")</strong>
+                </p>
+
+                <div class="mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary me-2">Назад</a>
+
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Create" asp-controller="Order" asp-route-id="@Model.Id" class="btn btn-main">
+                            Купи
+                        </a>
+                    }
+
+                    @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning ms-2">Edit</a>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

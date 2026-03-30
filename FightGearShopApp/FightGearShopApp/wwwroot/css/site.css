@@ -1,22 +1,85 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+    background-color: #f8f9fa;
+    color: #0d1b2a;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Карти */
+.card, .product-card {
+    background-color: #e0efff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Заглавия */
+h1, h2, h3, .section-title {
+    color: #1d4ed8;
+}
+
+/* Кнопки */
+.btn-main {
+    background-color: #1d4ed8;
+    color: white;
+    border: none;
+}
+
+    .btn-main:hover {
+        background-color: #2563eb;
+    }
+
+.btn-outline-secondary {
+    border-color: #1d4ed8;
+    color: #1d4ed8;
+}
+
+    .btn-outline-secondary:hover {
+        background-color: #1d4ed8;
+        color: white;
+    }
+
+/* Таблици */
+.table {
+    background-color: #e0efff;
+}
+
+    .table th {
+        color: #1d4ed8;
+    }
+
+.table-hover tbody tr:hover {
+    background-color: #cbe4ff;
+}
+
+/* Slider captions */
+.carousel-caption h1, .carousel-caption p {
+    color: #f8f9fa; /* контрастен текст върху снимките */
+}
+
+/* Product image */
+.product-img {
+    border-radius: 8px;
+    max-height: 400px;
+    object-fit: contain;
+    .carousel, .carousel-inner, .carousel-item
+
+{
+    z-index: 1;
+}
+}
+
+/* Price */
+.price {
+    color: #1d4ed8;
+    font-weight: bold;
+}
+
+/* HR lines */
+hr {
+    border-color: #b3d4fc;
+}
+.navbar,
+.navbar .nav-link,
+.navbar .btn {
+    position: relative;
+    z-index: 1050; /* Bootstrap dropdown default z-index е 1000 */
 }
