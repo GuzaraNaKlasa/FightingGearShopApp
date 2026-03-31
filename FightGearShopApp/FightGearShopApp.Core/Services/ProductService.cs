@@ -58,11 +58,22 @@ namespace FightGearShopApp.Core.Services
             if (!string.IsNullOrEmpty(searchStringCategoryName)
                 && !string.IsNullOrEmpty(searchStringBrandName))
             {
-                products =products.Where(x => x.Category.CategoryName.ToLower()
-                .Contains (searchStringBrandName.ToLower())).ToList();
+                products = products.Where(x => x.Category.CategoryName.ToLower()
+                .Contains(searchStringBrandName.ToLower())).ToList();
 
             }
-            return products;
+            else if (!String.IsNullOrEmpty(searchStringCategoryName))
+            {
+                products = products.Where(x => x.Category.CategoryName.ToLower().ToLower().Contains
+                (searchStringCategoryName.ToLower())).ToList();
+            }
+
+            else if (!String.IsNullOrEmpty(searchStringBrandName))
+            {
+                products = products.Where(x => x.Brand.BrandName.ToLower().Contains(searchStringBrandName.ToLower())).ToList();
+            }
+
+                return products;
 
         }
 

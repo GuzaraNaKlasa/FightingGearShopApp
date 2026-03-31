@@ -20,7 +20,7 @@ namespace FightGearShopApp.Controllers
 
         public OrderController(IProductService productService,IOrderService orderService)
         {
-            _productService = _productService;
+            _productService = productService;
                 _orderService= orderService;
         }      
 
