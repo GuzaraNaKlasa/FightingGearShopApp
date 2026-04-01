@@ -45,7 +45,7 @@ namespace FightGearShopApp.Controllers
             var users=allUsers.Where(x=>x.IsAdmin==false)
                 .OrderBy(x=>x.UserName).ToList();
             //Return list
-            return this.View(User);
+            return this.View(users);
         }
 
         // GET: ClientController/Details/5

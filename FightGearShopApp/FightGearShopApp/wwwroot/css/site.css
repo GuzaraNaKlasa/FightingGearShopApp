@@ -83,3 +83,6 @@ hr {
     position: relative;
     z-index: 1050; /* Bootstrap dropdown default z-index å 1000 */
 }
+#login {
+    justify-content:center;
+}

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FightGearShopApp.Infrastucture.Migrations
 {
     /// <inheritdoc />
-    public partial class asd : Migration
+    public partial class eee : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
