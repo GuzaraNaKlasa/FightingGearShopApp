@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<FightGearShopApp.Models.Product.ProductIndexVM>
+@{
     ViewData["Title"] = "Начало";
 }
 
@@ -9,8 +10,7 @@
     }
 
     .hero {
-        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-        url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed');
+        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed');
         background-size: cover;
         background-position: center;
         padding: 120px 0;
@@ -21,9 +21,9 @@
         border: none;
     }
 
-    .btn-main:hover {
+        .btn-main:hover {
             background-color: #3b82f6;
-    }
+        }
 
     .card {
         background-color: #0d1b2a;
@@ -31,9 +31,9 @@
         transition: 0.3s;
     }
 
-    .card:hover {
-        transform: scale(1.05);
-    }
+        .card:hover {
+            transform: scale(1.05);
+        }
 
     .section-title {
         color: #2563eb;
@@ -59,7 +59,8 @@
             <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
                 <h1 class="display-3 fw-bold">БОЙНИ СПОРТОВЕ</h1>
                 <p class="lead">Професионална екипировка за шампиони</p>
-                <a href="#" class="btn btn-main btn-lg mt-3">Разгледай</a>
+                <a class="btn btn-main btn-lg mt-3" asp-area="" asp-controller="Product" asp-action="Index">Разгледай</a>
+
             </div>
         </div>
 
@@ -104,21 +105,21 @@
 
 </div>
 
-    <!-- CONTROLS -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
+<!-- CONTROLS -->
+<button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+</button>
 
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
+<button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+</button>
 
-    <!-- INDICATORS -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-    </div>
+<!-- INDICATORS -->
+@* <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+</div> *@
 
 </div>
 
@@ -132,8 +133,15 @@
             <div class="card text-center p-3">
                 <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e" class="card-img-top" style="height:200px; object-fit:cover;">
                 <div class="card-body">
-                    <h5 class="card-title">Боксови ръкавици</h5>
-                    <a href="#" class="btn btn-main">Виж</a>
+                    <h5>
+                        <a asp-controller="Product"
+                           asp-action="Index"
+                           asp-route-searchStringCategoryName="Boxing Gloves"
+                           class="btn btn-warning">
+                            Boxing Gloves
+                        </a>
+                    </h5>
+
                 </div>
             </div>
         </div>
@@ -142,8 +150,13 @@
             <div class="card text-center p-3">
                 <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" class="card-img-top" style="height:200px; object-fit:cover;">
                 <div class="card-body">
-                    <h5 class="card-title">MMA екипировка</h5>
-                    <a href="#" class="btn btn-main">Виж</a>
+                    <h5 <a asp-controller="Product"
+                       asp-action="Index"
+                       asp-route-searchStringCategoryName="Shin Pads"
+                       class="btn btn-warning">
+                       Shin Pads
+                    </a></h5>
+
                 </div>
             </div>
         </div>
@@ -152,8 +165,13 @@
             <div class="card text-center p-3">
                 <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438" class="card-img-top" style="height:200px; object-fit:cover;">
                 <div class="card-body">
-                    <h5 class="card-title">Фитнес аксесоари</h5>
-                    <a href="#" class="btn btn-main">Виж</a>
+                    <h5 <a asp-controller="Product"
+                       asp-action="Index"
+                       asp-route-searchStringCategoryName="Wraps"
+                       class="btn btn-warning">
+                       Wraps
+                    </a></h5>
+                    
                 </div>
             </div>
         </div>
@@ -162,60 +180,41 @@
 </div>
 
 <!-- FEATURED PRODUCTS -->
-<div class="container py-5">
-    <h2 class="text-center section-title">Продукти</h2>
+@if (Model != null && Model.Any() && this.User.Identity.IsAuthenticated)
+{
 
-    <div class="row g-4">
+    <div class="container py-5">
+        <h2 class="text-center section-title">Продукти</h2>
 
-        <div class="col-md-3">
-            <div class="card p-2">
-                <img src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a" class="card-img-top" style="height:180px; object-fit:cover;">
-                <div class="card-body text-center">
-                    <h6>Ръкавици Venum</h6>
-                    <p>120 лв.</p>
-                    <button class="btn btn-main btn-sm">Купи</button>
+        <div class="row g-4">
+
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <div class="card p-2">
+                        <img src="Html.DisplayFor(modelItem =>item.Picture)" alt="image" width="100" />
+                        <div class="card-body text-center">
+                            <h6>@Html.DisplayFor(modelItem=>item.ProductName)</h6>
+                            <p>@Html.DisplayFor(modelItem=>item.Price)</p>
+                           <a asp-action="Create" asp-controller="Order" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Buy</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }           
         </div>
-
-        <div class="col-md-3">
-            <div class="card p-2">
-                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61" class="card-img-top" style="height:180px; object-fit:cover;">
-                <div class="card-body text-center">
-                    <h6>Шорти MMA</h6>
-                    <p>65 лв.</p>
-                    <button class="btn btn-main btn-sm">Купи</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card p-2">
-                <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e" class="card-img-top" style="height:180px; object-fit:cover;">
-                <div class="card-body text-center">
-                    <h6>Протектор за зъби</h6>
-                    <p>25 лв.</p>
-                    <button class="btn btn-main btn-sm">Купи</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card p-2">
-                <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" class="card-img-top" style="height:180px; object-fit:cover;">
-                <div class="card-body text-center">
-                    <h6>Бинтове за ръце</h6>
-                    <p>15 лв.</p>
-                    <button class="btn btn-main btn-sm">Купи</button>
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
-
+}
+else
+{
+    <div class="text-center py-5">
+    <h1>Register To see the most popular products!</h1>
+    <a class="btn btn-main btn-lg mt-3" asp-area="Identity" asp-page="/Account/Login" >Login now</a>
+    </div>
+}
 <!-- CTA -->
-<div class="text-center py-5">
-    <h2>Готов ли си за тренировка?</h2>
-    <a href="#" class="btn btn-main btn-lg mt-3">Регистрирай сега</a>
-</div>
+    <div class="text-center py-5">
+        <h2>Готов ли си за тренировка?</h2>
+    <a class="btn btn-main btn-lg mt-3" asp-area="Identity" asp-page="/Account/Register">Register now</a>
+    }
+    </div>

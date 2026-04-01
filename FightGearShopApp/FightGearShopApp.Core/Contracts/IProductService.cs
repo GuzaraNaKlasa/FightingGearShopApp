@@ -23,6 +23,8 @@ namespace FightGearShopApp.Core.Contracts
         bool RemoveById(int delproductId);
 
         List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName);
+
+        List<Product> GetTop3Products();
     }
 
 }

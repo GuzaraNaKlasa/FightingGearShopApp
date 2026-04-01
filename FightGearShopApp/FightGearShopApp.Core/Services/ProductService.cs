@@ -12,6 +12,7 @@ namespace FightGearShopApp.Core.Services
 {
     public class ProductService : IProductService
     {
+        private readonly IProductService _productService;
         private readonly ApplicationDbContext _context;
 
         public ProductService (ApplicationDbContext context)
@@ -75,6 +76,15 @@ namespace FightGearShopApp.Core.Services
 
                 return products;
 
+        }
+
+        public List<Product> GetTop3Products()
+        {
+           return _context.Orders
+                .GroupBy(o=>o.ProductId)
+                .Take(3)
+                .Select(g=>g.First().Product)
+                .ToList();
         }
 
         public bool RemoveById(int productId)
