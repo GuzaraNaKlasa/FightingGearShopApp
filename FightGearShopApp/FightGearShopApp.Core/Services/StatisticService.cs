@@ -35,7 +35,7 @@ namespace FightGearShopApp.Core.Services
 
         public decimal SumOrders()
         {
-            var Sum = _context.Orders.Sum(x => x.TotalPrice);
+            var Sum = _context.Orders.Sum(x => x.Quantity * x.Price - x.Quantity *x.Price * x.Discount /100);
             return Sum;
         }
     }

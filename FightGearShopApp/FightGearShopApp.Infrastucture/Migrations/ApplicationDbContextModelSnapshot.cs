@@ -161,7 +161,7 @@ namespace FightGearShopApp.Infrastucture.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quanity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")

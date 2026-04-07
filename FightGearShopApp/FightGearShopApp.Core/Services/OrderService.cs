@@ -46,7 +46,7 @@ namespace FightGearShopApp.Core.Services
                 OrderDate = DateTime.Now,
                 ProductId = productId,
                 UserId = userId,
-                Quanity = quantity,
+                Quantity = quantity,
                 Price = product.Price,
                 Discount = product.Discount,
             };

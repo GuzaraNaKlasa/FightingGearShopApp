@@ -56,6 +56,7 @@ namespace FightGearShopApp.Core.Services
         {
           List <Product> products = _context.Products.ToList();
 
+
             if (!string.IsNullOrEmpty(searchStringCategoryName)
                 && !string.IsNullOrEmpty(searchStringBrandName))
             {
@@ -80,11 +81,9 @@ namespace FightGearShopApp.Core.Services
 
         public List<Product> GetTop3Products()
         {
-           return _context.Orders
-                .GroupBy(o=>o.ProductId)
-                .Take(3)
-                .Select(g=>g.First().Product)
-                .ToList();
+           var topProducts = _context.Products.OrderByDescending(p=>p.Orders.Count()).Take(3).ToList();
+            return topProducts;
+                
         }
 
         public bool RemoveById(int productId)

@@ -24,10 +24,10 @@ namespace FightGearShopApp.Infrastucture.Data.Domain
         public string UserId { get; set; }=null!;
         public virtual ApplicationUser User { get; set; } = null!;
 
-        public int Quanity { get; set; }
+        public int Quantity { get; set; }
         public Decimal Price { get; set; }
         public Decimal Discount { get; set; }
 
-        public decimal TotalPrice { get { return this.Quanity * this.Price-this.Quanity * this.Price * this.Discount/100; } }
+        public decimal TotalPrice { get { return this.Quantity * this.Price-this.Quantity * this.Price * this.Discount/100; } }
     }
 }
