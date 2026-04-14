@@ -10,10 +10,10 @@ namespace FightGearShopApp.Core.Contracts
 {
     public interface IProductService
     {
-        bool Create(string name, int brandId, int CategoryId, string picture, int quanity,
+        bool Create(string name, int brandId, int CategoryId, string picture,string description ,int quanity,
             decimal price, decimal discount);
 
-        bool Update(int productId, string name, int brandId, int categoryId, string picture, int quanity,
+        bool Update(int productId, string name, int brandId, int categoryId, string picture, string description ,int quanity,
             decimal price, decimal discount);
 
         List<Product> GetProducts();

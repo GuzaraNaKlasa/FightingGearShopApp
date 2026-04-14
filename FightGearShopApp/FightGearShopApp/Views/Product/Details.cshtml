@@ -17,8 +17,12 @@
             <div class="col-md-7">
                 <h2 class="mb-3 text-primary">@Model.ProductName</h2>
 
-                <p class="text-dark mb-1">Марка: <strong>@Model.BrandName</strong></p>
-                <p class="text-dark mb-1">Категория: <strong>@Model.CategoryName</strong></p>
+                <p class="text-dark mb-1"> @Html.DisplayFor(model => model.BrandName) <strong>@Model.BrandName</strong></p>
+                <p class="text-dark mb-1"> @Html.DisplayFor(model => model.CategoryName) <strong>@Model.CategoryName</strong></p>
+                <p class="text-dark mb-1">@Html.DisplayFor(model => model.Description)<strong>@Model.Description</strong></p>
+
+
+
 
                 <hr />
 

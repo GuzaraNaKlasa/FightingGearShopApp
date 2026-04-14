@@ -21,9 +21,12 @@ namespace FightGearShopApp.Models.Product
 
         public string CategoryName { get; set; }
 
-        
+
         [Display(Name = "Picture")]
-        public string Picture { get; set; }
+        public string Picture { get; set; } = null!;
+
+        [Display(Name = "Description")]
+        public string Description { get; set; } 
 
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }

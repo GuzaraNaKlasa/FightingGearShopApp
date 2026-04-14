@@ -32,7 +32,8 @@
             <th>@Html.DisplayNameFor(model => model.ProductName)</th>
             <th>@Html.DisplayNameFor(model => model.BrandName)</th>
             <th>@Html.DisplayNameFor(model => model.CategoryName)</th>
-            <th>Снимка</th>
+            <th>@Html.DisplayNameFor(model => model.Picture)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
             <th>@Html.DisplayNameFor(model => model.Quantity)</th>
             <th>@Html.DisplayNameFor(model => model.Price)</th>
             <th>@Html.DisplayNameFor(model => model.Discount)</th>
@@ -50,9 +51,11 @@
                 <td>
                     <img src="@item.Picture" alt="Image" style="width:80px; height:80px; object-fit:cover; border-radius:6px;">
                 </td>
+                <td>@item.Description</td>
                 <td>@item.Quantity</td>
                 <td>@item.Price лв.</td>
                 <td>@item.Discount %</td>
+
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-sm">Details</a>
 

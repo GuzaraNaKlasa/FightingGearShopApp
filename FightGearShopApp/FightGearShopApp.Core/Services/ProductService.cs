@@ -20,7 +20,7 @@ namespace FightGearShopApp.Core.Services
             _context = context;
         }
 
-        public bool Create(string name, int brandId, int CategoryId, string picture, int quantity,
+        public bool Create(string name, int brandId, int CategoryId, string picture, string description, int quantity,
             decimal price, decimal discount)
         {
             Product item = new Product
@@ -30,6 +30,7 @@ namespace FightGearShopApp.Core.Services
                 Category = _context.Categories.Find(CategoryId),
 
                 Picture = picture,
+                Description = description,
                 Quantity = quantity,
                 Price = price,
                 Discount = discount
@@ -98,7 +99,7 @@ namespace FightGearShopApp.Core.Services
         }
         
 
-        public bool Update(int productId, string name, int brandId, int categoryId, string picture, int quantity,
+        public bool Update(int productId, string name, int brandId, int categoryId, string picture, string description, int quantity,
             decimal price, decimal discount)
         {
             var product =GetProductById(productId);
@@ -115,6 +116,7 @@ namespace FightGearShopApp.Core.Services
             product.Category=_context.Categories.Find(categoryId);
 
             product.Picture=picture;
+            product.Description=description;
             product.Quantity=quantity;
             product.Price=price;
             product.Discount=discount;

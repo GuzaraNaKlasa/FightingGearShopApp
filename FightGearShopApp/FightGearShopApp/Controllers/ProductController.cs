@@ -40,6 +40,7 @@ namespace FightGearShopApp.Controllers
                  CategoryId = product.CategoryId,
                  CategoryName = product.Category.CategoryName,
                  Picture = product.Picture,
+                 Description = product.Description,
                  Quantity = product.Quantity,
                  Price = product.Price,
                  Discount = product.Discount
@@ -65,6 +66,7 @@ namespace FightGearShopApp.Controllers
                 BrandId = item.BrandId,
                 CategoryId = item.CategoryId,
                 Picture = item.Picture,
+                Description = item.Description,
                 Quantity = item.Quantity,
                 Price = item.Price,
                 Discount = item.Discount
@@ -100,7 +102,7 @@ namespace FightGearShopApp.Controllers
             if (ModelState.IsValid)
             {
                 var createId = _productService.Create(product.ProductName, product.BrandId,
-                    product.CategoryId, product.Picture, product.Quantity, product.Price, product.Discount);
+                    product.CategoryId, product.Picture,product.Description, product.Quantity, product.Price, product.Discount);
                 if (createId)
                 {
                     return RedirectToAction(nameof(Index));
@@ -127,6 +129,7 @@ namespace FightGearShopApp.Controllers
                  BrandId = product.BrandId,
                  CategoryId = product.CategoryId,
                  Picture = product.Picture,
+                 Description = product.Description,
                  Quantity = product.Quantity,
                  Price = product.Price,
                  Discount = product.Discount
@@ -160,7 +163,7 @@ namespace FightGearShopApp.Controllers
                 {
                     var updated = _productService.Update
                    (id, product.ProductName, product.BrandId, product.CategoryId,
-                   product.Picture, product.Quantity, product.Price,
+                   product.Picture,product.Description, product.Quantity, product.Price,
                    product.Discount);
                     if (updated)
                     {
@@ -189,6 +192,7 @@ namespace FightGearShopApp.Controllers
                 BrandId = item.BrandId,
                 CategoryId = item.CategoryId,
                 Picture = item.Picture,
+                Description = item.Description,
                 Quantity = item.Quantity,
                 Price = item.Price,
                 Discount = item.Discount
