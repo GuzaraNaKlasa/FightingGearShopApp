@@ -150,7 +150,8 @@
             <div class="card text-center p-3">
                 <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" class="card-img-top" style="height:200px; object-fit:cover;">
                 <div class="card-body">
-                    <h5 <a asp-controller="Product"
+
+                    <h5> <a asp-controller="Product"
                        asp-action="Index"
                        asp-route-searchStringCategoryName="Shin Pads"
                        class="btn btn-warning">
@@ -165,9 +166,9 @@
             <div class="card text-center p-3">
                 <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438" class="card-img-top" style="height:200px; object-fit:cover;">
                 <div class="card-body">
-                    <h5 <a asp-controller="Product"
+                    <h5> <a asp-controller="Product"
                        asp-action="Index"
-                       asp-route-searchStringCategoryName="Wraps"
+                       asp-route-searchStringCategoryName="Boxing warps"
                        class="btn btn-warning">
                        Бинтове
                     </a></h5>
@@ -203,18 +204,21 @@
                 </div>
             }           
         </div>
+        <div class="text-center py-5">
+            <h1>
+                Готов ли си за тренировка?</h1>
+            <a class="btn btn-main btn-lg mt-3" asp-area="" asp-controller="Product" asp-action="Index">Пазарувай сега</a>
+        </div>
     </div>
 }
 else
 {
     <div class="text-center py-5">
-    <h1>Регистрирай се за да видиш още</h1>
-    <a class="btn btn-main btn-lg mt-3" asp-area="Identity" asp-page="/Account/Login" >Login now</a>
+        <h1>Регистрирай се за да видиш още</h1>
+        <a class="btn btn-main btn-lg mt-3" asp-area="Identity" asp-page="/Account/Login">Login now</a>
     </div>
 }
-<!-- CTA -->
-    <div class="text-center py-5">
-        <h2>Готов ли си за тренировка?</h2>
-    <a class="btn btn-main btn-lg mt-3" asp-area="Identity" asp-page="/Account/Register">Register now</a>
-    }
-    </div>
+
+   
+    
+  

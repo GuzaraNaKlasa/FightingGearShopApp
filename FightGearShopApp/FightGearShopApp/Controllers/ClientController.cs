@@ -1,4 +1,5 @@
-﻿using FightGearShopApp.Infrastucture.Data.Domain;
+﻿using FightGearShopApp.Core.Contracts;
+using FightGearShopApp.Infrastucture.Data.Domain;
 using FightGearShopApp.Models.Client;
 
 using Microsoft.AspNetCore.Http;
@@ -10,9 +11,11 @@ namespace FightGearShopApp.Controllers
     public class ClientController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public ClientController(UserManager<ApplicationUser> userManager)
+        private readonly IOrderService _orderService;
+        public ClientController(UserManager<ApplicationUser> userManager, IOrderService orderService)
         {
             this._userManager = userManager;
+            this._orderService = orderService;
         }
 
 
@@ -104,6 +107,12 @@ namespace FightGearShopApp.Controllers
             {
                 return NotFound();
             }
+            var listOfOrders = _orderService.GetOrdersByUser(id);
+            if (listOfOrders.Count > 0)
+            {
+                return RedirectToAction("DeleteDenied");
+            }
+
             ClientDeleteVM userToDelete = new ClientDeleteVM()
             {
                 Id = user.Id,
@@ -139,6 +148,10 @@ namespace FightGearShopApp.Controllers
         }
 
         public ActionResult Success()
+        {
+            return View();
+        }
+        public ActionResult DeleteDenied()
         {
             return View();
         }
