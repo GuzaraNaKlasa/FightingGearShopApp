@@ -12,7 +12,6 @@ namespace FightGearShopApp.Core.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IProductService _productService;
         private readonly ApplicationDbContext _context;
 
         public ProductService (ApplicationDbContext context)
