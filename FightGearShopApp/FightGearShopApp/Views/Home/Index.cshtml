@@ -181,20 +181,20 @@
 </div>
 
 <!-- FEATURED PRODUCTS -->
-@if (Model != null && Model.Any() && this.User.Identity.IsAuthenticated)
+@if ((this.User.Identity.IsAuthenticated) || (this.User.IsInRole("Administrator")))
 {
 
     <div class="container py-5">
         <h2 class="text-center section-title">Продукти</h2>
 
-        <div class="row g-4">
+        <div class="row g-4"style="justify-content:center">
 
 
             @foreach (var item in Model)
             {
                 <div class="col-md-3">
                     <div class="card p-2">
-                        <img src="Html.DisplayFor(modelItem =>item.Picture)" alt="image" width="100" />
+                        <img src="@item.Picture" alt="image"  class="card-img-top" style="height:200px; object-fit:cover;"  />
                         <div class="card-body text-center">
                             <h6>@Html.DisplayFor(modelItem=>item.ProductName)</h6>
                             <p>@Html.DisplayFor(modelItem=>item.Price)</p>
