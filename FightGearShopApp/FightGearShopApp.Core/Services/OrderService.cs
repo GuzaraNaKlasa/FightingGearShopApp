@@ -60,11 +60,7 @@ namespace FightGearShopApp.Core.Services
 
         }
 
-        public Order GetOrderById(int orderId)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public List<Order> GetOrders()
         {
             return _context.Orders.OrderByDescending(x=>x.OrderDate).ToList();
@@ -78,15 +74,7 @@ namespace FightGearShopApp.Core.Services
 
         }
 
-        public bool RemoveById(int orderId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(int orderId, int productId, string userId, int quantity)
-        {
-            throw new NotImplementedException();
-        }
+        
 
        
 
